@@ -1,6 +1,21 @@
 import React from 'react';
 
 export default function Goal({goal, refreshGoals}) {
+
+    const deleteGoal = async () => {
+        if (window.confirm("Please confirm delete")) {
+            try {
+                await fetch('/.netlify/functions/goals', {
+                    method: 'DELETE',
+                    body: JSON.stringify({id: goal.id}),
+                });
+                refreshGoals();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
+
     const markGoalCompleted = async () => {
         try {
             await fetch('/.netlify/functions/goals', {
@@ -13,17 +28,6 @@ export default function Goal({goal, refreshGoals}) {
         }
     };
 
-    const deleteGoal = async () => {
-        try {
-            await fetch('/.netlify/functions/goals', {
-                method: 'DELETE',
-                body: JSON.stringify({id: goal.id}),
-            });
-            refreshGoals();
-        } catch (err) {
-            console.error(err);
-        }
-    };
     return (
         <div className="list-group-item">
             <h1>{goal.title}</h1>
@@ -39,12 +43,19 @@ export default function Goal({goal, refreshGoals}) {
             </p>
             {!goal.completed && (
                 <button
-                    className="btn btn-sm btn-primary"
+                    className="btn btn-sm btn-success"
                     onClick={markGoalCompleted}
                 >
                     Completed
                 </button>
             )}
+
+            {/*<button*/}
+            {/*    className="btn btn-sm btn-warning ml-2"*/}
+            {/*>*/}
+            {/*    Update*/}
+            {/*</button>*/}
+
             <button
                 className="btn btn-sm btn-danger ml-2"
                 onClick={deleteGoal}

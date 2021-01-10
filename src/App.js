@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import GoalList from './components/GoalList';
 import GoalForm from './components/GoalForm';
 

@@ -38,7 +38,7 @@ export default function GoalForm({goalAdded}) {
             <div className="card-body">
                 <form className="" onSubmit={submitGoal}>
                     <div className="form-group">
-                        <label htmlFor="title">title</label>
+                        <label htmlFor="title">Title</label>
                         <input
                             type="text"
                             name="title"
@@ -47,16 +47,18 @@ export default function GoalForm({goalAdded}) {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
+
                     <div className="form-group">
-                        <label htmlFor="text">text</label>
-                        <input
-                            type="text"
+                        <label htmlFor="text">Details</label>
+                        <textarea
                             name="text"
                             value={text}
                             className="form-control"
                             onChange={(e) => setText(e.target.value)}
+                            rows="3"
                         />
                     </div>
+
                     <div className="form-group">
                         <p>Tags</p>
                         <Tags tagsUpdated={setTags} key={count}/>
