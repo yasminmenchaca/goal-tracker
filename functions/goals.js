@@ -4,6 +4,15 @@ const createGoal = require('./helpers/createGoal');
 const deleteGoal = require('./helpers/deleteGoal');
 const updateGoal = require('./helpers/updateGoal');
 exports.handler = async (event) => {
-    // TODO: call appropriate helper function based on HTTP method
-    return formattedReturn(200, 'Hello World');
+    if (event.httpMethod === 'GET') {
+        return await getGoals(event);
+    } else if (event.httpMethod === 'POST') {
+        return await createGoal(event);
+    } else if (event.httpMethod === 'PUT') {
+        return await updateGoal(event);
+    } else if (event.httpMethod === 'DELETE') {
+        return await deleteGoal(event);
+    } else {
+        return formattedReturn(405, {});
+    }
 };
