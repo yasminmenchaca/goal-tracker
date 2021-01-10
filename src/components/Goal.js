@@ -1,26 +1,41 @@
 import React from 'react';
 
-export default function Goal({ goal, refreshGoals }) {
+export default function Goal({goal, refreshGoals}) {
     const markGoalCompleted = async () => {
-        //TODO mark goal as completed
+        try {
+            await fetch('/api/goals', {
+                method: 'PUT',
+                body: JSON.stringify({...goal, completed: true}),
+            });
+            refreshGoals();
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const deleteGoal = async () => {
-        //TODO delete goal
+        try {
+            await fetch('/api/goals', {
+                method: 'DELETE',
+                body: JSON.stringify({id: goal.id}),
+            });
+            refreshGoals();
+        } catch (err) {
+            console.error(err);
+        }
     };
     return (
         <div className="list-group-item">
-            <a href={goal.link}>
-                <h4 className="list-group-item-heading">{goal.name}</h4>
-            </a>
+            <h1>{goal.title}</h1>
+            <h5>{goal.text}</h5>
             <p>
                 Tags:{' '}
                 {goal.tags &&
-                    goal.tags.map((tag, index) => (
-                        <span className="badge badge-primary mr-2" key={index}>
+                goal.tags.map((tag, index) => (
+                    <span className="badge badge-primary mr-2" key={index}>
                             {tag}
                         </span>
-                    ))}
+                ))}
             </p>
             {!goal.completed && (
                 <button
