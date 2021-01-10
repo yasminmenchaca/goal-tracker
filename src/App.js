@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import GoalList from './components/GoalList';
+import GoalForm from './components/GoalForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [courses, setGoals] = useState([]);
+
+    const loadGoals = async () => {
+        //TODO:load the courses
+    };
+
+    useEffect(() => {
+        loadGoals();
+    }, []);
+    return (
+        <div className="container mt-5">
+            <h1 className="mb-5 text-center">Course Tracker</h1>
+            <GoalForm courseAdded={loadGoals} />
+            <GoalList courses={courses} refreshCourses={loadGoals} />
+        </div>
+    );
 }
 
 export default App;
