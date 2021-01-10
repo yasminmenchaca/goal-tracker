@@ -3,7 +3,7 @@ import React from 'react';
 export default function Goal({goal, refreshGoals}) {
     const markGoalCompleted = async () => {
         try {
-            await fetch('/api/goals', {
+            await fetch('/.netlify/functions/goals', {
                 method: 'PUT',
                 body: JSON.stringify({...goal, completed: true}),
             });
@@ -15,7 +15,7 @@ export default function Goal({goal, refreshGoals}) {
 
     const deleteGoal = async () => {
         try {
-            await fetch('/api/goals', {
+            await fetch('/.netlify/functions/goals', {
                 method: 'DELETE',
                 body: JSON.stringify({id: goal.id}),
             });

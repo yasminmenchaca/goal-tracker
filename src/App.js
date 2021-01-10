@@ -8,7 +8,7 @@ function App() {
 
     const loadGoals = async () => {
         try {
-            const res = await fetch('/api/goals');
+            const res = await fetch('/.netlify/functions/goals');
             const goals = await res.json();
             setGoals(goals);
         } catch (error) {

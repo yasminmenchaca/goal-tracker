@@ -16,7 +16,7 @@ export default function GoalForm({goalAdded}) {
     const submitGoal = async (e) => {
         e.preventDefault();
         try {
-            await fetch('/api/goals', {
+            await fetch('/.netlify/functions/goals', {
                 method: 'POST',
                 body: JSON.stringify({
                     title,
